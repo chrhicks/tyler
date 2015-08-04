@@ -1,0 +1,39 @@
+{
+  "name": "tyler",
+  "version": "0.0.1",
+  "description": "A layout manager for balancing grids",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test",
+    "see-coverage": "gulp test && open ./test/coverage/lcov-report/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/chrhicks/tyler.git"
+  },
+  "author": "Chris Hicks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrhicks/tyler/issues"
+  },
+  "homepage": "https://github.com/chrhicks/tyler",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "gulp": "^3.9.0",
+    "gulp-coveralls": "^0.1.4",
+    "gulp-istanbul": "^0.10.0",
+    "gulp-mocha": "^2.1.3",
+    "gulp-util": "^3.0.6",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.4",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-requirejs": "^0.2.2",
+    "phantomjs": "^1.9.17",
+    "require-dir": "^0.3.0",
+    "requirejs": "^2.1.20"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1"
+  }
+}
