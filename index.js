@@ -19,7 +19,7 @@
   'use strict';
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
-    define(['lodash'], factory);
+    define(['underscore'], factory);
   } else if (typeof module === 'object' && module.exports) {
     // only CommonJS-like environments that support module.exports,
     // like Node and Browserify
