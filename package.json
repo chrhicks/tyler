@@ -1,5 +1,5 @@
 {
-  "name": "tyler",
+  "name": "tylerdurden",
   "version": "0.0.1",
   "description": "A layout manager for balancing grids",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/chrhicks/tyler.git"
+    "url": "git+ssh://git@github.com/chrhicks/tylerdurden.git"
   },
   "author": "Chris Hicks",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chrhicks/tyler/issues"
+    "url": "https://github.com/chrhicks/tylerdurden/issues"
   },
-  "homepage": "https://github.com/chrhicks/tyler",
+  "homepage": "https://github.com/chrhicks/tylerdurden",
   "devDependencies": {
     "chai": "^3.2.0",
     "gulp": "^3.9.0",
