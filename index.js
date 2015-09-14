@@ -156,6 +156,15 @@
     return result;
   }
 
+  /**
+   * Abstractly layout the provided elements according to their position
+   * properties.
+   *
+   * @param  {[type]} elements List of element objects with at minimum the position and columns property
+   * @param  {[type]} opts     Options for this function:
+   *                           - maxPositions - the size of the resulting layout (usually the total number of elements in your grid)
+   * @return {[type]}          List of elements in the correct position of the resulting array, backfilled with blank elements
+   */
   function layoutElements (elements, opts) {
     var maxPosition = _.max(_.map(elements, function (e) { return e.position; }));
     var result = new Array(_.max([maxPosition, opts.maxPositions]));
