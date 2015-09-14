@@ -67,7 +67,7 @@
         if (_.includes(existingPositions, position)) {
           // console.log('skipping position ' + position + '. Already held by an element');
         } else {
-          var newElement = { position: position, spans: span };
+          var newElement = { position: position, columns: span };
           var isValidForPosition = isValid(newElement, positionedElements, isValidOpts);
           // console.log('position:', position, 'isValid', isValidForPosition);
           if (isValidForPosition) {
@@ -87,7 +87,7 @@
    * And element is defined as:
    * {
    *    position: [Number],
-   *    spans:    [Number]
+   *    columns:  [Number]
    * }
    *
    * @param  {Object}
@@ -121,9 +121,9 @@
    *
    * Aka, if elements looks like:
    * [
-   *    { position: 1, spans: 2 },
-   *    { position: 5, spans: 2 },
-   *    { position: 10, spans: 3 }
+   *    { position: 1, columns: 2 },
+   *    { position: 5, columns: 2 },
+   *    { position: 10, columns: 3 }
    * ];
    *
    * You should expect a result that looks like:
@@ -147,10 +147,31 @@
     var maxPosition = _.max(_.map(elements, function (e) { return e.position; }));
     var result = new Array(_.max([maxPosition, opts.maxPositions]));
 
-    _.fill(result, 1);
+    result = _.map(result, function () { return 1; });
 
     _.forEach(elements, function (e) {
-      result[e.position] = e.spans > cols ? cols : e.spans;
+      result[e.position] = e.columns > cols ? cols : e.columns;
+    });
+
+    return result;
+  }
+
+  function layoutElements (elements, opts) {
+    var maxPosition = _.max(_.map(elements, function (e) { return e.position; }));
+    var result = new Array(_.max([maxPosition, opts.maxPositions]));
+
+    result = _.map(result, function () { return { columns: 1 }; });
+
+    _.forEach(elements, function (e) {
+      result[e.position] = e;
+    });
+
+    result = _.forEach(result, function (e, idx) {
+      var elem = result[idx];
+
+      if (!elem.position) {
+        result[idx].position = idx;
+      }
     });
 
     return result;
@@ -221,6 +242,7 @@
     isBalanced: isBalanced,
     injectElement: injectElement,
     createLayout: createLayout,
+    layoutElements: layoutElements,
     generateValidPositions: generateValidPositions
   };
 

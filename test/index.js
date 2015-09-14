@@ -110,11 +110,11 @@ describe('Tyler', function () {
 
   describe('should determine if an element can be added to layout', function () {
     it('should reject a new element at existing position', function () {
-      var newElement = { position: 5, spans: 2 };
+      var newElement = { position: 5, columns: 2 };
       var exisitingElements = [
-          { position: 1, spans: 2 },
-          { position: 5, spans: 2 },
-          { position: 10, spans: 3 }
+          { position: 1, columns: 2 },
+          { position: 5, columns: 2 },
+          { position: 10, columns: 3 }
         ];
 
       var injectFn = function () { tyler.injectElement(newElement, exisitingElements); };
@@ -122,11 +122,11 @@ describe('Tyler', function () {
     });
 
     it('should add a new element at new position', function () {
-      var newElement = { position: 15, spans: 2 };
+      var newElement = { position: 15, columns: 2 };
       var exisitingElements = [
-          { position: 1, spans: 2 },
-          { position: 5, spans: 2 },
-          { position: 10, spans: 3 }
+          { position: 1, columns: 2 },
+          { position: 5, columns: 2 },
+          { position: 10, columns: 3 }
         ];
 
       var injected = tyler.injectElement(newElement, exisitingElements);
@@ -139,9 +139,9 @@ describe('Tyler', function () {
   describe('should create a layout for elements', function () {
     it('should layout spans for elements', function () {
       var elements = [
-          { position: 1, spans: 2 },
-          { position: 5, spans: 2 },
-          { position: 10, spans: 3 }
+          { position: 1, columns: 2 },
+          { position: 5, columns: 2 },
+          { position: 10, columns: 3 }
         ];
       var opts = {
           maxPositions: 11
@@ -163,9 +163,9 @@ describe('Tyler', function () {
           [2], 1,     // This double is added at position 11
           1, 1, 1
        */
-      var newElement = { position: 11, spans: 2 };
+      var newElement = { position: 11, columns: 2 };
       var exisitingElements = [
-          { position: 4, spans: 2 }
+          { position: 4, columns: 2 }
         ];
       var opts = {
         maxColumns: 3,
@@ -196,10 +196,10 @@ describe('Tyler', function () {
           1, 1,
           [2]   // This double is added at position 12
        */
-      var newElement = { position: 12, spans: 2 };
+      var newElement = { position: 12, columns: 2 };
       var exisitingElements = [
-          { position: 0, spans: 3 },
-          { position: 5, spans: 2 }
+          { position: 0, columns: 3 },
+          { position: 5, columns: 2 }
         ];
       var opts = {
         maxColumns: 3,
@@ -219,9 +219,9 @@ describe('Tyler', function () {
           [2], 1,     // This double is added at position 8
           1, 1, 1
        */
-      var newElement = { position: 8, spans: 2 };
+      var newElement = { position: 8, columns: 2 };
       var exisitingElements = [
-          { position: 1, spans: 2 }
+          { position: 1, columns: 2 }
         ];
       var opts = {
         maxColumns: 3,
@@ -252,10 +252,10 @@ describe('Tyler', function () {
           1, 1,
           1, [2]   // This double is added at position 13
        */
-      var newElement = { position: 13, spans: 2 };
+      var newElement = { position: 13, columns: 2 };
       var exisitingElements = [
-          { position: 0, spans: 3 },
-          { position: 5, spans: 2 }
+          { position: 0, columns: 3 },
+          { position: 5, columns: 2 }
         ];
       var opts = {
         maxColumns: 3,
@@ -275,10 +275,10 @@ describe('Tyler', function () {
           1, 1, 1,
           1
        */
-      var newElement = { position: 1, spans: 3 };
+      var newElement = { position: 1, columns: 3 };
       var exisitingElements = [
-          { position: 0, spans: 2 },
-          { position: 5, spans: 2 }
+          { position: 0, columns: 2 },
+          { position: 5, columns: 2 }
         ];
       var opts = {
         maxColumns: 3,
@@ -304,8 +304,8 @@ describe('Tyler', function () {
 
     it('should generate a map from existing layout', function () {
       var exisitingElements = [
-          { position: 0, spans: 2 },
-          { position: 5, spans: 2 }
+          { position: 0, columns: 2 },
+          { position: 5, columns: 2 }
         ];
 
       var result = tyler.generateValidPositions(exisitingElements, 15);
@@ -316,6 +316,42 @@ describe('Tyler', function () {
         };
 
       expect(result).to.deep.equal(expected);
+    });
+  });
+
+  describe('layout elements', function () {
+    it('should layout elements', function () {
+      var newElement = { position: 1, columns: 3, modelType: 'editorial' };
+      var exisitingElements = [
+          { position: 0, columns: 2, modelType: 'editorial' },
+          { position: 5, columns: 2, modelType: 'editorial' }
+        ];
+      var opts = {
+        maxPositions: 15
+      };
+
+      var injected = tyler.injectElement(newElement, exisitingElements);
+      var result = tyler.layoutElements(injected, opts);
+      var expected = [
+        { position: 0, columns: 2, modelType: 'editorial' },
+        { position: 1, columns: 3, modelType: 'editorial' },
+        { position: 2, columns: 1 },
+        { position: 3, columns: 1 },
+        { position: 4, columns: 1 },
+        { position: 5, columns: 2, modelType: 'editorial' },
+        { position: 6, columns: 1 },
+        { position: 7, columns: 1 },
+        { position: 8, columns: 1 },
+        { position: 9, columns: 1 },
+        { position: 10, columns: 1 },
+        { position: 11, columns: 1 },
+        { position: 12, columns: 1 },
+        { position: 13, columns: 1 },
+        { position: 14, columns: 1 }
+      ];
+
+      expect(result).to.deep.equal(expected);
+
     });
   });
 
